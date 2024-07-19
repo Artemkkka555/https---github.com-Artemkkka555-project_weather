@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="RU">
+<head>
+    <meta charset="UTF-8">
+    <title>Прогноз погоды</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</head>
+<body>
+    <h1>Прогноз погоды</h1>
+    <form action="/" method="post">
+        <label for="city">Город:</label><br>
+        <input type="text" id="city" name="city"><br>
+        <input type="submit" value="Submit">
+        <div id="suggestions-container">
+            <ul id="suggestions"></ul>
+        </div>
+    </form>
+    <ul id="suggestions"></ul>
+    {% if weather %}
+    <h2>Погода в {{ city }}</h2>
+    <p>Кажущаяся температура: {{ weather.current.apparent_temperature }}°C</p>
+    <p>Дата и время : {{ weather.current.time }}</p>
+    {% else %}
+    <p>Пожалуйста, введите название города.</p>
+    {% endif %}
+</body>
+</html>
